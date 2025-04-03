@@ -38,6 +38,20 @@
        }
     }
 
+        stage("Deploy"){
+            agent{
+                docker{
+                    image 'node:18-alpine'
+                    reuseNode true
+                }
+            }
+            steps {
+               sh '''
+                    npm install nrtlify-cli
+                    node_modules/.bin/netlify --version
+                '''
+            }
+        }
     post {
         always {
             junit 'test-results/junit.xml'
