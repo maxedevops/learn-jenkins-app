@@ -1,4 +1,4 @@
-pipeline {
+ pipeline {
     agent any
     stages {
         stage("Build"){
@@ -37,4 +37,10 @@ pipeline {
             
        }
     }
+
+    post (
+        always (
+            junit 'test-results/junit.xml'
+        )
+    )
 }
